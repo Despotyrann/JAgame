@@ -1,0 +1,27 @@
+<!DOCTYPE html> 
+<html lang="de"> 
+<head>     
+    <meta charset="UTF-8">     
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">     
+    <title>Jane Austen Quiz</title>     
+    <!-- Eingebundenes CSS -->
+    <link rel="stylesheet" href="style.css"> 
+</head> 
+<body>      
+    <h1>📖 Which Book is This From?</h1>          
+    <div class="card">         
+        <!-- Hier werden die Absätze dynamisch eingefügt -->         
+        <div class="zitat" id="zitat-text">Lade Quizfragen...</div>                  
+         
+        <!-- Button um mehr Kontext anzufordern -->         
+        <button class="guess-btn hint-btn" id="hint-button" onclick="mehrAbsaetzeAnzeigen()">➕ Show More</button>                  
+         
+        <!-- Die Antwortmöglichkeiten -->         
+        <div class="button-grid" id="antwort-buttons"></div>         
+        <div class="score" id="score-text">Score: 0</div>     
+    </div>      
+
+    <!-- Eingebundenes JavaScript -->
+    <script src="quiz.js"></script> 
+</body> 
+</html>

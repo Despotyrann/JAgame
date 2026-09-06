@@ -1,0 +1,67 @@
+/* style.css */
+body { 
+    font-family: sans-serif; 
+    background: #f0f2f5; 
+    padding: 20px; 
+    text-align: center; 
+}
+.card { 
+    background: white; 
+    max-width: 600px; 
+    margin: 20px auto; 
+    padding: 30px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+}
+.zitat { 
+    font-style: italic; 
+    font-size: 1.1em; 
+    color: #333; 
+    line-height: 1.6; 
+    margin-bottom: 25px; 
+    text-align: left; 
+    white-space: pre-line; 
+    white-space: pre-wrap; 
+}
+.paragraph-block { 
+    margin-bottom: 15px; 
+}
+         
+/* Buttons für das Spiel */
+button.guess-btn { 
+    display: block; 
+    width: 100%; 
+    padding: 12px; 
+    margin: 8px 0; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    background: #f8f9fa; 
+    font-size: 1em; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
+button.guess-btn:hover { 
+    background: #e9ecef; 
+}
+         
+/* Spezieller Button für den Hinweis */
+button.hint-btn { 
+    background: #e3f2fd; 
+    color: #0d47a1; 
+    border: 1px solid #bbdefb; 
+    font-weight: bold; 
+    margin-bottom: 20px; 
+}
+button.hint-btn:hover { 
+    background: #bbdefb; 
+}
+         
+.score { 
+    font-weight: bold; 
+    margin-top: 20px; 
+    color: #666; 
+    font-size: 1.2em; 
+}
+.button-grid { 
+    margin-top: 20px; 
+}
