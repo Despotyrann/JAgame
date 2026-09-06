@@ -1,0 +1,9 @@
+# ignore all files in root
+/*
+
+# allow folder
+!/jagame/
+
+# allow file
+!/index.html
+!.gitignore
