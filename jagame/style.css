@@ -1,11 +1,11 @@
-/* style.css */
 body { 
     font-family: sans-serif; 
-    background: #f0f2f5; 
+    background: #f0f2f5; /* Klassisches, neutrales Hellgrau */
     padding: 20px; 
     text-align: center; 
 }
 .card { 
+    position: relative;
     background: white; 
     max-width: 600px; 
     margin: 20px auto; 
@@ -13,6 +13,29 @@ body {
     border-radius: 12px; 
     box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
 }
+
+/* Typography Modifications */
+.menu-title {
+    font-size: 2.2em;
+    color: #4a148c;
+    margin-bottom: 5px;
+}
+.menu-subtitle {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 25px;
+}
+.quiz-title {
+    font-size: 1.3em; /* Etwas kleiner wie gewünscht */
+    color: #222;
+    margin-bottom: 5px;
+}
+.progress {
+    font-size: 0.85em; 
+    color: #777;
+    margin-bottom: 20px;
+}
+
 .zitat { 
     font-style: italic; 
     font-size: 1.1em; 
@@ -23,12 +46,10 @@ body {
     white-space: pre-line; 
     white-space: pre-wrap; 
 }
-.paragraph-block { 
-    margin-bottom: 15px; 
-}
          
-/* Buttons für das Spiel */
+/* Base Button Styling */
 button.guess-btn { 
+    position: relative;
     display: block; 
     width: 100%; 
     padding: 12px; 
@@ -38,13 +59,17 @@ button.guess-btn {
     background: #f8f9fa; 
     font-size: 1em; 
     cursor: pointer; 
-    transition: 0.2s; 
+    transition: background 0.2s, border-color 0.2s; 
 }
-button.guess-btn:hover { 
+button.guess-btn:hover:not(:disabled) { 
     background: #e9ecef; 
 }
+button.guess-btn:disabled {
+    cursor: default;
+    color: #888;
+}
          
-/* Spezieller Button für den Hinweis */
+/* Hint Button */
 button.hint-btn { 
     background: #e3f2fd; 
     color: #0d47a1; 
@@ -52,10 +77,91 @@ button.hint-btn {
     font-weight: bold; 
     margin-bottom: 20px; 
 }
-button.hint-btn:hover { 
+button.hint-btn:hover:not(:disabled) { 
     background: #bbdefb; 
 }
+
+/* Base Correct / Wrong Feedback Styles */
+button.guess-btn.correct, button.guess-btn.correct:disabled {
+    background-color: #4caf50 !important;
+    color: white !important;
+    border-color: #388e3c !important;
+    font-weight: bold;
+}
+button.guess-btn.wrong, button.guess-btn.wrong:disabled {
+    background-color: #f44336 !important;
+    color: white !important;
+    border-color: #d32f2f !important;
+}
+button.guess-btn.reveal-correct, button.guess-btn.reveal-correct:disabled {
+    background-color: #e8f5e9 !important;
+    color: #2e7d32 !important;
+    border: 2px dashed #4caf50 !important;
+    font-weight: bold;
+}
+
+/* Next / Action Navigation Buttons */
+button.next-btn {
+    background: #4a148c;
+    color: white;
+    border: none;
+    font-weight: bold;
+    margin-top: 25px;
+    box-shadow: 0 4px 6px rgba(74, 20, 140, 0.2);
+}
+button.next-btn:hover:not(:disabled) {
+    background: #6a1b9a;
+}
+/* Outgrayed state for action button */
+button.next-btn:disabled {
+    background: #e0e0e0 !important;
+    color: #a0a0a0 !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+}
          
+/* NEW SEPARATE RESULT CARD STYLING */
+.result-card {
+    margin-top: 25px !important; /* Abstand zur Startmenü-Karte */
+    border: 1px solid #ddd;
+    background: #ffffff;
+}
+
+/* 1. Bewertungsüberschrift deutlich prominenter */
+#result-rating-title {
+    font-size: 2em; 
+    color: #4a148c;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+}
+
+/* 2. Punktzahl deutlich dezenter und kleiner */
+.final-score {
+    font-size: 0.95em;
+    color: #666;
+    font-weight: normal;
+    margin-bottom: 25px;
+}
+
+/* 3. Bewertungsquote (Zitat) */
+.quote-box {
+    background: #fdf8ff; /* Ganz dezente lila Tönung für den Fokus */
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center; /* 🎯 Text wird hier zentriert */
+}
+
+.quote-box p {
+    font-style: italic;
+    font-size: 1.25em; /* Größere, lesbarere Schrift für das Zitat */
+    line-height: 1.6;
+    color: #222;
+    margin: 0;
+    display: inline-block; /* Sorgt für saubere Zentrierung bei mehrzeiligem Text */
+}
+
+
 .score { 
     font-weight: bold; 
     margin-top: 20px; 
@@ -64,4 +170,21 @@ button.hint-btn:hover {
 }
 .button-grid { 
     margin-top: 20px; 
+}
+
+/* Particles Framework */
+.particle {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(1); 
+    animation: explode 1.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards; 
+    will-change: transform;
+}
+@keyframes explode {
+    0% { transform: translate(-50%, -50%); opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0.2); opacity: 0; }
 }

@@ -1,27 +1,51 @@
-<!DOCTYPE html> 
-<html lang="de"> 
-<head>     
-    <meta charset="UTF-8">     
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">     
-    <title>Jane Austen Quiz</title>     
-    <!-- Eingebundenes CSS -->
-    <link rel="stylesheet" href="style.css"> 
-</head> 
-<body>      
-    <h1>📖 Which Book is This From?</h1>          
-    <div class="card">         
-        <!-- Hier werden die Absätze dynamisch eingefügt -->         
-        <div class="zitat" id="zitat-text">Lade Quizfragen...</div>                  
-         
-        <!-- Button um mehr Kontext anzufordern -->         
-        <button class="guess-btn hint-btn" id="hint-button" onclick="mehrAbsaetzeAnzeigen()">➕ Show More</button>                  
-         
-        <!-- Die Antwortmöglichkeiten -->         
-        <div class="button-grid" id="antwort-buttons"></div>         
-        <div class="score" id="score-text">Score: 0</div>     
-    </div>      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane Austen Quiz</title> <!-- Bleibt gleich -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <!-- Eingebundenes JavaScript -->
-    <script src="quiz.js"></script> 
-</body> 
+    <!-- 1. START MENU SCREEN -->
+    <div class="card" id="menu-screen">
+        <h1 class="menu-title">Reads & Regency</h1>
+        <p class="menu-subtitle"> Prove your accomplishments in the Novels of Jane Austen.</p>
+        
+        <button class="guess-btn next-btn" onclick="startRound()">Commence ➡️</button>
+    </div>
+
+    <!-- SEPARATE RESULT CARD BELOW THE MENU -->
+    <div class="card result-card" id="results-container" style="display: none;">
+        <h2 id="result-rating-title">Excellent</h2>
+        <div class="final-score" id="final-score-text">You got 0 out of 10 correct!</div>
+        <div class="quote-box">
+            <p id="result-rating-desc">"Quotation placeholder..."</p>
+        </div>
+    </div>
+
+    <!-- 2. QUIZ SCREEN -->
+    <div class="card" id="quiz-screen" style="display: none;">
+        <h2 class="quiz-title">📖 Where is this passage to be found?</h2>
+        <div class="progress" id="progress-text">Quotation: 1 of 10</div>
+
+        <!-- Paragraphs dynamically loaded here -->
+        <div class="zitat" id="zitat-text">Loading quiz questions...</div>
+                           
+        <!-- Button to request more context (Never locks!) -->
+        <button class="guess-btn hint-btn" id="hint-button" onclick="mehrAbsaetzeAnzeigen()">➕ Reveal More</button>
+                           
+        <!-- Answer choices -->
+        <div class="button-grid" id="antwort-buttons"></div>
+
+        <!-- Action Button (Always visible, disabled until answered) -->
+        <button class="guess-btn next-btn" id="next-button" onclick="aktionsButtonKlick()" disabled>Proceed ➡️</button>
+
+        <div class="score" id="score-text">Score: 0</div>
+    </div>
+
+    <script src="game_config.js"></script>
+    <script src="quiz.js"></script>
+</body>
 </html>
