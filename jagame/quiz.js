@@ -12,6 +12,13 @@ let aktuelleRundenNummer = 0;
 let maxRunden = 10; // Can be modified dynamically by future bonus events
 let hatGeantwortet = false;
 
+wendeZufallsPaletteAn();
+vorbereiteParallaxMasken();
+
+document.getElementById('start-button').addEventListener('click', startRound);
+document.getElementById('hint-button').addEventListener('click', mehrAbsaetzeAnzeigen);
+document.getElementById('next-button').addEventListener('click', aktionsButtonKlick);
+
 // Load JSON data
 fetch('buecher_komplett.json')
     .then(response => {
@@ -23,9 +30,34 @@ fetch('buecher_komplett.json')
         verfuegbareBuecher = Object.keys(data).filter(b => data[b].length > 0);
     })
     .catch(err => {
-        document.getElementById('zitat-text').innerHTML = "Error loading game data! Check JSON file.";
+        document.getElementById('zitat-text').textContent = "Error loading game data! Check JSON file.";
         console.error(err);
     });
+
+function vorbereiteParallaxMasken() {
+    const maskPaths = [
+        'img/background_layer1.png',
+        'img/background_layer2.png',
+        'img/background_layer3.png'
+    ];
+
+    const layerPromises = maskPaths.map((src) => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(src);
+            img.onerror = () => reject(new Error(`Could not load mask: ${src}`));
+            img.src = src;
+        });
+    });
+
+    Promise.allSettled(layerPromises)
+        .then(() => {
+            document.querySelectorAll('.parallax-bg').forEach(el => el.classList.add('ready'));
+        })
+        .catch(() => {
+            document.querySelectorAll('.parallax-bg').forEach(el => el.classList.add('ready'));
+        });
+}
 
 function startRound() {
     punkte = 0;
@@ -33,11 +65,11 @@ function startRound() {
     maxRunden = 10; 
     
     // Blendet die alte Ergebniskarte wieder aus
-    document.getElementById('results-container').style.display = "none";
+    document.getElementById('results-container').hidden = true;
     
     // Wechselt die Bildschirme
-    document.getElementById('menu-screen').style.display = "none";
-    document.getElementById('quiz-screen').style.display = "block";
+    document.getElementById('menu-screen').hidden = true;
+    document.getElementById('quiz-screen').hidden = false;
     
     neueFrage();
 }
@@ -49,13 +81,13 @@ function neueFrage() {
     hatGeantwortet = false;
     
     // UI State updates
-    document.getElementById('progress-text').innerHTML = `Quotation: ${aktuelleRundenNummer} of ${maxRunden}`;
-    document.getElementById('score-text').innerHTML = `Score: ${punkte}`;
+    document.getElementById('progress-text').textContent = `Quotation: ${aktuelleRundenNummer} of ${maxRunden}`;
+    document.getElementById('score-text').textContent = `Score: ${punkte}`;
     
     // Reset Action Button to Disabled
     const nextBtn = document.getElementById('next-button');
     nextBtn.disabled = true;
-    nextBtn.innerHTML = "Proceed ➡️";
+    nextBtn.textContent = "Proceed 🪶";
 
     erzeugeRateButtons();
                  
@@ -74,12 +106,12 @@ function neueFrage() {
 
 function erzeugeRateButtons() {
     const buttonContainer = document.getElementById('antwort-buttons');
-    buttonContainer.innerHTML = "";
+    buttonContainer.replaceChildren();
                   
     buecherPool.forEach(buch => {
         const btn = document.createElement('button');
-        btn.className = "guess-btn";
-        btn.innerHTML = buch;
+        btn.className = "quiz-button answer-button";
+        btn.textContent = buch;
         btn.setAttribute('data-book', buch);
         btn.onclick = () => pruefeAntwort(btn, buch);
         buttonContainer.appendChild(btn);
@@ -87,7 +119,8 @@ function erzeugeRateButtons() {
 }
 
 function renderText() {
-    document.getElementById('zitat-text').innerHTML = angezeigteAbsaetze.join("\n\n");
+    const quoteText = angezeigteAbsaetze.join("\n\n").replace(/<\\i>/gi, "</i>");
+    document.getElementById('zitat-text').innerHTML = quoteText;
 }
 
 function mehrAbsaetzeAnzeigen() {
@@ -105,7 +138,7 @@ function pruefeAntwort(targetButton, auswahl) {
     if (hatGeantwortet) return; 
     hatGeantwortet = true;
     
-    const buttons = document.querySelectorAll('#antwort-buttons .guess-btn');
+    const buttons = document.querySelectorAll('#antwort-buttons .answer-button');
     let richtigerButton = null;
 
     buttons.forEach(btn => {
@@ -126,13 +159,13 @@ function pruefeAntwort(targetButton, auswahl) {
         }
     }
 
-    document.getElementById('score-text').innerHTML = `Score: ${punkte}`;
+    document.getElementById('score-text').textContent = `Score: ${punkte}`;
     
     // Change Button appearance dynamically at round end
     const nextBtn = document.getElementById('next-button');
     nextBtn.disabled = false;
     if (aktuelleRundenNummer >= maxRunden) {
-        nextBtn.innerHTML = "Conclude ⚖️";
+        nextBtn.textContent = "Conclude ⚖️";
     }
 }
 
@@ -146,8 +179,8 @@ function aktionsButtonKlick() {
 }
 
 function zeigeEndauswertung() {
-    document.getElementById('quiz-screen').style.display = "none";
-    document.getElementById('menu-screen').style.display = "block";
+    document.getElementById('quiz-screen').hidden = true;
+    document.getElementById('menu-screen').hidden = false;
     
     let scoreKey = Math.max(0, Math.min(punkte, 10)); 
     let evaluation = bewertungsPool[scoreKey] || { title: "Evaluated", quotes: ["Processed successfully."] };
@@ -155,13 +188,13 @@ function zeigeEndauswertung() {
     let quotesArray = evaluation.quotes;
     let randomQuote = quotesArray[Math.floor(Math.random() * quotesArray.length)];
 
-    document.getElementById('result-rating-title').innerHTML = evaluation.title;
-    document.getElementById('final-score-text').innerHTML = `You got ${punkte} out of ${maxRunden} correct!`;
-    document.getElementById('result-rating-desc').innerHTML = `"${randomQuote}"`;
+    document.getElementById('result-rating-title').textContent = evaluation.title;
+    document.getElementById('final-score-text').textContent = `You got ${punkte} out of ${maxRunden} correct!`;
+    document.getElementById('result-rating-desc').textContent = `"${randomQuote}"`;
     
     // Show separate card
     const resultsContainer = document.getElementById('results-container');
-    resultsContainer.style.display = "block";
+    resultsContainer.hidden = false;
     
     // Smooth scroll directly to the new results card so the player sees it instantly
     setTimeout(() => {
@@ -201,4 +234,47 @@ function createParticles(targetButton) {
         targetButton.appendChild(particle);
         setTimeout(() => particle.remove(), 1500);
     }
+}
+
+
+function wendeZufallsPaletteAn() {
+    // Falls keine Paletten geladen wurden, abbrechen
+    if (typeof quizPaletten === 'undefined' || quizPaletten.length === 0) return;
+    
+    // Zufällige Palette wählen
+    const palette = quizPaletten[Math.floor(Math.random() * quizPaletten.length)];
+    console.log(`Applying Theme: ${palette.name} 🎨`);
+    
+    // Injektion der CSS-Variablen in das Dokument-Root
+    const root = document.documentElement;
+    root.style.setProperty('--bg-base', palette.bg_base);
+    root.style.setProperty('--bg-layer1', palette.bg_layer1);
+    root.style.setProperty('--bg-layer2', palette.bg_layer2);
+    root.style.setProperty('--bg-layer3', palette.bg_layer3);
+    root.style.setProperty('--card-bg', palette.card_bg);
+    root.style.setProperty('--text-main', palette.text_main);
+    root.style.setProperty('--text-sub', palette.text_sub);
+    root.style.setProperty('--button-3-bg', palette.button_3_bg);
+    root.style.setProperty('--button-2-bg', palette.button_2_bg);
+    root.style.setProperty('--button-1-bg', palette.button_1_bg);
+    root.style.setProperty('--quote-box-bg', palette.quote_box_bg);
+
+    const feedbackColors = palette.name.startsWith('Dark')
+        ? {
+            correctBackground: '#285d47',
+            correctText: '#b9efd0',
+            wrongBackground: '#713d48',
+            wrongText: '#ffd0d4'
+        }
+        : {
+            correctBackground: '#b9e8c8',
+            correctText: '#205b3d',
+            wrongBackground: '#f3b8b8',
+            wrongText: '#762f37'
+        };
+
+    root.style.setProperty('--feedback-correct-bg', feedbackColors.correctBackground);
+    root.style.setProperty('--feedback-correct-text', feedbackColors.correctText);
+    root.style.setProperty('--feedback-wrong-bg', feedbackColors.wrongBackground);
+    root.style.setProperty('--feedback-wrong-text', feedbackColors.wrongText);
 }

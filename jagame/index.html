@@ -7,17 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="mask-preload" aria-hidden="true">
+        <img src="img/background_layer1.png" alt="">
+        <img src="img/background_layer2.png" alt="">
+        <img src="img/background_layer3.png" alt="">
+    </div>
+
+    <!-- Parallax Background Layers -->
+    <div class="parallax-bg layer-3"></div>
+    <div class="parallax-bg layer-2"></div>
+    <div class="parallax-bg layer-1"></div>
 
     <!-- 1. START MENU SCREEN -->
     <div class="card" id="menu-screen">
         <h1 class="menu-title">Reads & Regency</h1>
         <p class="menu-subtitle"> Prove your accomplishments in the Novels of Jane Austen.</p>
         
-        <button class="guess-btn next-btn" onclick="startRound()">Commence ➡️</button>
+        <button class="quiz-button action-button" id="start-button">Commence 🪶</button>
     </div>
 
     <!-- SEPARATE RESULT CARD BELOW THE MENU -->
-    <div class="card result-card" id="results-container" style="display: none;">
+    <div class="card result-card" id="results-container" hidden>
         <h2 id="result-rating-title">Excellent</h2>
         <div class="final-score" id="final-score-text">You got 0 out of 10 correct!</div>
         <div class="quote-box">
@@ -26,7 +36,7 @@
     </div>
 
     <!-- 2. QUIZ SCREEN -->
-    <div class="card" id="quiz-screen" style="display: none;">
+    <div class="card" id="quiz-screen" hidden>
         <h2 class="quiz-title">📖 Where is this passage to be found?</h2>
         <div class="progress" id="progress-text">Quotation: 1 of 10</div>
 
@@ -34,13 +44,13 @@
         <div class="zitat" id="zitat-text">Loading quiz questions...</div>
                            
         <!-- Button to request more context (Never locks!) -->
-        <button class="guess-btn hint-btn" id="hint-button" onclick="mehrAbsaetzeAnzeigen()">➕ Reveal More</button>
+        <button class="quiz-button hint-button" id="hint-button">📜 Reveal More</button>
                            
         <!-- Answer choices -->
         <div class="button-grid" id="antwort-buttons"></div>
 
         <!-- Action Button (Always visible, disabled until answered) -->
-        <button class="guess-btn next-btn" id="next-button" onclick="aktionsButtonKlick()" disabled>Proceed ➡️</button>
+        <button class="quiz-button action-button" id="next-button" disabled>Proceed 🪶</button>
 
         <div class="score" id="score-text">Score: 0</div>
     </div>

@@ -86,3 +86,221 @@ const bewertungsPool = {
         "How clever you are, to know something of which you are ignorant.",
         "The wisest and the best of men, nay, the wisest and best of their actions, may be rendered ridiculous by a person whose first object in life is a joke."] }
 };
+
+const quizPaletten = [
+    /* --- 1. LIGHT THEMES (Hell hinten -> Dunkel vorne) --- */
+    {
+        name: "Light Purple",
+        bg_base: "#f5efe6",      // Ganz unten (Am hellsten)
+        bg_layer1: "#d3b9ed",    // Layer 1 (foreground)
+        bg_layer2: "#dfccf2",    // Layer 2
+        bg_layer3: "#eadef7",    // Layer 3 (background)
+        card_bg: "#fcfbfa",      
+        text_main: "#4a148c",    
+        text_sub: "#755694",     
+        button_3_bg: "#ead8f4",
+        button_2_bg: "#d2aee8",
+        button_1_bg: "#bb86d9",
+        quote_box_bg: "#faf4ff"  
+    },
+    {
+        name: "Light Pink",
+        bg_base: "#fcf8f2",      // Ganz unten (Am hellsten)
+        bg_layer1: "#f5b2be",    // Layer 1 (foreground)
+        bg_layer2: "#f9cbd3",    // Layer 2
+        bg_layer3: "#fbe3e7",    // Layer 3 (background)
+        card_bg: "#fffdfc",      
+        text_main: "#881b2d",    
+        text_sub: "#a25865",     
+        button_3_bg: "#ffdce2",
+        button_2_bg: "#f5aebb",
+        button_1_bg: "#e98296",   
+        quote_box_bg: "#fff5f6"
+    },
+    {
+        name: "Light Green",
+        bg_base: "#f2f5f3",      // Ganz unten (Am hellsten)
+        bg_layer1: "#b5cbba",    // Layer 1 (foreground)
+        bg_layer2: "#ccdcd0",    // Layer 2
+        bg_layer3: "#e2ede6",    // Layer 3 (background)
+        card_bg: "#fafdfb",      
+        text_main: "#1e3d2f",    
+        text_sub: "#49685a",     
+        button_3_bg: "#dceee1",
+        button_2_bg: "#bdd9c6",
+        button_1_bg: "#9fc5ad",   
+        quote_box_bg: "#f3f8f5"
+    },
+    {
+        name: "Light Yellow",
+        bg_base: "#fffdf0",
+        bg_layer1: "#f3df91",
+        bg_layer2: "#f8ebba",
+        bg_layer3: "#fff8dc",
+        card_bg: "#fffef5",
+        text_main: "#5c4800",
+        text_sub: "#806d24",
+        button_3_bg: "#fff8dc",
+        button_2_bg: "#f8e9a8",
+        button_1_bg: "#eed477",
+        quote_box_bg: "#fffbe8"
+    },
+    {
+        name: "Light Orange",
+        bg_base: "#fff3e5",
+        bg_layer1: "#f5a866",
+        bg_layer2: "#ffc994",
+        bg_layer3: "#ffe1bf",
+        card_bg: "#fffaf4",
+        text_main: "#713b16",
+        text_sub: "#98643b",
+        button_3_bg: "#ffe5c7",
+        button_2_bg: "#ffc48d",
+        button_1_bg: "#ed9855",
+        quote_box_bg: "#fff0dc"
+    },
+    {
+        name: "Light Red",
+        bg_base: "#fff0ef",
+        bg_layer1: "#c94c56",
+        bg_layer2: "#e8737b",
+        bg_layer3: "#f6aaa7",
+        card_bg: "#fff8f7",
+        text_main: "#681b22",
+        text_sub: "#985057",
+        button_3_bg: "#ffc9c7",
+        button_2_bg: "#df7078",
+        button_1_bg: "#bd4650",
+        quote_box_bg: "#ffebea"
+    },
+
+    /* --- 2. MEDIUM THEMES (Umgekehrt inklusive Base: Dunkel ganz unten -> Hell ganz vorne) --- */
+    {
+        name: "Medium Purple",
+        bg_base: "#d3b9ed",      // Ganz unten (dunkelste Ebene, umgekehrt zur Light Palette)
+        bg_layer1: "#f5efe6",    // Layer 1 (hellste Ebene)
+        bg_layer2: "#eadef7",    // Layer 2
+        bg_layer3: "#dfccf2",    // Layer 3
+        card_bg: "#f3e8fa",      
+        text_main: "#320b5e",    
+        text_sub: "#5c3d82",     
+        button_3_bg: "#ead8f5",
+        button_2_bg: "#cfabe5",
+        button_1_bg: "#b27bd2",
+        quote_box_bg: "#f6eeff"  
+    },
+    {
+        name: "Medium Pink",
+        bg_base: "#f5b2be",      // Ganz unten (dunkelste Ebene, umgekehrt zur Light Palette)
+        bg_layer1: "#fcf8f2",    // Layer 1 (hellste Ebene)
+        bg_layer2: "#fbe3e7",    // Layer 2
+        bg_layer3: "#f9cbd3",    // Layer 3
+        card_bg: "#fff0f3",      
+        text_main: "#6b1120",    
+        text_sub: "#8e3d4c",     
+        button_3_bg: "#ffdce3",
+        button_2_bg: "#f3abbc",
+        button_1_bg: "#df7f98",    
+        quote_box_bg: "#fff2f4"
+    },
+    {
+        name: "Medium Green",
+        bg_base: "#b5cbba",      // Ganz unten (dunkelste Ebene, umgekehrt zur Light Palette)
+        bg_layer1: "#f2f5f3",    // Layer 1 (hellste Ebene)
+        bg_layer2: "#e2ede6",    // Layer 2
+        bg_layer3: "#ccdcd0",    // Layer 3
+        card_bg: "#e9f4ed",      
+        text_main: "#12261d",    
+        text_sub: "#344e41",     
+        button_3_bg: "#d7eadf",
+        button_2_bg: "#b8d4c1",
+        button_1_bg: "#91bda0",    
+        quote_box_bg: "#eef5f1"
+    },
+    {
+        name: "Medium Yellow",
+        bg_base: "#f3df91",
+        bg_layer1: "#fffdf0",
+        bg_layer2: "#fff8dc",
+        bg_layer3: "#f8ebba",
+        card_bg: "#fffbe7",
+        text_main: "#4c3b00",
+        text_sub: "#75621b",
+        button_3_bg: "#fff5c6",
+        button_2_bg: "#f8e6ac",
+        button_1_bg: "#e9cd78",
+        quote_box_bg: "#fff6cf"
+    },
+    {
+        name: "Medium Orange",
+        bg_base: "#f5a866",
+        bg_layer1: "#fff3e5",
+        bg_layer2: "#ffe1bf",
+        bg_layer3: "#ffc994",
+        card_bg: "#fff5eb",
+        text_main: "#562d12",
+        text_sub: "#8d5a32",
+        button_3_bg: "#ffe6c8",
+        button_2_bg: "#ffba7c",
+        button_1_bg: "#ec9a58",
+        quote_box_bg: "#fff1e0"
+    },
+    {
+        name: "Medium Red",
+        bg_base: "#c94c56",
+        bg_layer1: "#fff0ef",
+        bg_layer2: "#f6aaa7",
+        bg_layer3: "#e8737b",
+        card_bg: "#fff2f1",
+        text_main: "#4d171d",
+        text_sub: "#7a3a40",
+        button_3_bg: "#ffd6d5",
+        button_2_bg: "#e2797f",
+        button_1_bg: "#c74f5a",
+        quote_box_bg: "#fff0ef"
+    },
+
+    /* --- 3. DARK THEMES (Schnitt nochmals deutlich abgedunkelt gegen Blenden) --- */
+    {
+        name: "Dark Blue",
+        bg_base: "#0a0f18",      
+        bg_layer1: "#2d4868",
+        bg_layer2: "#1a2b40",
+        bg_layer3: "#0d1622",
+        card_bg: "#182231",      
+        text_main: "#f1f5f9",    
+        text_sub: "#94a3b8",     
+        button_3_bg: "#172130",
+        button_2_bg: "#22334a",
+        button_1_bg: "#2f4867",
+        quote_box_bg: "#243246"  
+    },
+    {
+        name: "Dark Purple",
+        bg_base: "#0d0711",      
+        bg_layer1: "#402252",
+        bg_layer2: "#24112f",
+        bg_layer3: "#12091a",
+        card_bg: "#1d1024",      
+        text_main: "#f3e8ff",    
+        text_sub: "#c084fc",     
+        button_3_bg: "#1a0e22",
+        button_2_bg: "#2b1537",
+        button_1_bg: "#412052",
+        quote_box_bg: "#2a1733"
+    },
+    {
+        name: "Dark Green",      
+        bg_base: "#07100a",      
+        bg_layer1: "#285039",
+        bg_layer2: "#14281c",
+        bg_layer3: "#09150e",
+        card_bg: "#102016",      
+        text_main: "#e2ede6",    
+        text_sub: "#8ba897",     
+        button_3_bg: "#0e1a13",
+        button_2_bg: "#17281e",
+        button_1_bg: "#21402e",
+        quote_box_bg: "#1b3325"  
+    }
+];
