@@ -18,6 +18,7 @@
     --feedback-correct-text: #205b3d;
     --feedback-wrong-bg: #f3b8b8;
     --feedback-wrong-text: #762f37;
+    /*color-scheme: only light;*/
 }
 
 [hidden] {
@@ -91,7 +92,7 @@ body {
   background-color: var(--bg-layer1);
   mask-image: url("img/background_layer1.png");
   mask-repeat: repeat;
-  mask-size: 160px 160px;
+  mask-size: 10vw auto;
   mask-position: 0 0;
   /* animation: drift1 10s linear infinite; */
 }
@@ -318,6 +319,32 @@ button.action-button:disabled {
 }
 .button-grid { 
     margin-top: 20px; 
+}
+
+/* 🎨 DYNAMISCHE SVG-GRAFIK FÜR DIE RESULT-CARD */
+.result-svg-graphic {
+    /* Nimmt dynamisch % der Breite deiner .card ein */
+    width: 50%;            
+    /* 📐 Garantiert ein perfektes, quadratisches Seitenverhältnis */
+    aspect-ratio: 1 / 1;   
+    /* 🛑 Deckelt die Größe auf Desktop-Bildschirmen, damit es nicht zu wuchtig wird */
+    /*max-width: 140px;      */
+    /* min-width: 80px;       Mindestgröße auf sehr kleinen Handys */
+    margin: 0 auto 20px auto; /* Zentriert die Grafik und gibt Abstand nach unten */
+    
+    /* 🎯 DIE LÖSUNG: Holt sich die dynamische Farbe des ersten Layers */
+    background-color: var(--button-1-bg); 
+    
+    /* Nutzt dein SVG als Schablone zum Ausschneiden */
+    -webkit-mask-image: url('img/JaneAustenSilhouette.svg'); /* Pfad zu deiner SVG-Datei eintragen */
+    mask-image: url('img/JaneAustenSilhouette.svg');
+    
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
 }
 
 /* --- PARTICLES --- */
