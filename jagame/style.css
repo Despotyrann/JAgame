@@ -70,9 +70,13 @@ body {
 .layer-3 {
   z-index: -3;
   background-color: var(--bg-layer3);
+  -webkit-mask-image: url("img/background_layer3.png");
   mask-image: url("img/background_layer3.png");
+  -webkit-mask-repeat: repeat;
   mask-repeat: repeat;
-  mask-size: 192px 192px;
+  -webkit-mask-size: min(max(6rem, min(12vw, 12rem)), 192px) auto;
+  mask-size: min(max(6rem, min(12vw, 12rem)), 192px) auto;
+  -webkit-mask-position: 0 0;
   mask-position: 0 0;
   /* animation: drift3 50s linear infinite; */
 }
@@ -80,9 +84,13 @@ body {
 .layer-2 {
   z-index: -2;
   background-color: var(--bg-layer2);
+  -webkit-mask-image: url("img/background_layer2.png");
   mask-image: url("img/background_layer2.png");
+  -webkit-mask-repeat: repeat;
   mask-repeat: repeat;
-  mask-size: 256px 256px;
+  -webkit-mask-size: min(max(8rem, min(16vw, 16rem)), 256px) auto;
+  mask-size: min(max(8rem, min(16vw, 16rem)), 256px) auto;
+  -webkit-mask-position: 0 0;
   mask-position: 0 0;
   /* animation: drift2 25s linear infinite; */
 }
@@ -90,9 +98,13 @@ body {
 .layer-1 {
   z-index: -1;
   background-color: var(--bg-layer1);
+  -webkit-mask-image: url("img/background_layer1.png");
   mask-image: url("img/background_layer1.png");
+  -webkit-mask-repeat: repeat;
   mask-repeat: repeat;
-  mask-size: 10vw auto;
+  -webkit-mask-size: min(max(5rem, min(10vw, 10rem)), 160px) auto;
+  mask-size: min(max(5rem, min(10vw, 10rem)), 160px) auto;
+  -webkit-mask-position: 0 0;
   mask-position: 0 0;
   /* animation: drift1 10s linear infinite; */
 }
