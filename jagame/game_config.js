@@ -1,13 +1,15 @@
 
+// Comment out any title below to remove it from both the answer buttons
+// and the set of possible question books.
 const buecherPool = [
-    "Emma",
-    "Lady Susan",
-    "Love and Freindship [sic]",
-    "Mansfield Park",
-    "Northanger Abbey",
-    "Persuasion",
-    "Pride and Prejudice",
-    "Sense and Sensibility"
+    { titel: "Emma", emoji: "💘" },
+    // { titel: "Lady Susan", emoji: "✉️" },
+    // { titel: "Love and Freindship [sic]", emoji: "💌" },
+    { titel: "Mansfield Park", emoji: "🌳" },
+    { titel: "Northanger Abbey", emoji: "👻" },
+    { titel: "Persuasion", emoji: "🌊" },
+    { titel: "Pride and Prejudice", emoji: "🦚" },
+    { titel: "Sense and Sensibility", emoji: "💞" }
 ];
 
 // Add as many quotes into the arrays as you want. The engine will pick one randomly!

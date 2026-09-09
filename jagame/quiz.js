@@ -1,5 +1,6 @@
 let alleBuecherdaten = {};
 let verfuegbareBuecher = [];
+let buchBeschriftungen = {};
          
 // Game architecture state
 let richtigesBuch = "";
@@ -19,6 +20,32 @@ document.getElementById('start-button').addEventListener('click', startRound);
 document.getElementById('hint-button').addEventListener('click', mehrAbsaetzeAnzeigen);
 document.getElementById('next-button').addEventListener('click', aktionsButtonKlick);
 
+function normalisiereBuchEintrag(eintrag) {
+    if (typeof eintrag === "string") {
+        return { titel: eintrag, emoji: "" };
+    }
+
+    if (eintrag && typeof eintrag === "object") {
+        return {
+            titel: eintrag.titel ?? eintrag.name ?? eintrag.book ?? "",
+            emoji: eintrag.emoji ?? ""
+        };
+    }
+
+    return { titel: "", emoji: "" };
+}
+
+function aktualisiereBuchlisten() {
+    const aktiveBuecher = buecherPool
+        .map(normalisiereBuchEintrag)
+        .filter(({ titel }) => titel && Array.isArray(alleBuecherdaten[titel]) && alleBuecherdaten[titel].length > 0);
+
+    verfuegbareBuecher = aktiveBuecher.map(({ titel }) => titel);
+    buchBeschriftungen = Object.fromEntries(
+        aktiveBuecher.map(({ titel, emoji }) => [titel, emoji || ""])
+    );
+}
+
 // Load JSON data
 fetch('buecher_komplett.json')
     .then(response => {
@@ -27,7 +54,7 @@ fetch('buecher_komplett.json')
     })
     .then(data => {
         alleBuecherdaten = data;
-        verfuegbareBuecher = Object.keys(data).filter(b => data[b].length > 0);
+        aktualisiereBuchlisten();
     })
     .catch(err => {
         document.getElementById('zitat-text').textContent = "Error loading game data! Check JSON file.";
@@ -107,13 +134,17 @@ function neueFrage() {
 function erzeugeRateButtons() {
     const buttonContainer = document.getElementById('antwort-buttons');
     buttonContainer.replaceChildren();
-                  
-    buecherPool.forEach(buch => {
+
+    const antwortBuecher = buecherPool
+        .map(normalisiereBuchEintrag)
+        .filter(({ titel }) => verfuegbareBuecher.includes(titel));
+
+    antwortBuecher.forEach(({ titel, emoji }) => {
         const btn = document.createElement('button');
         btn.className = "quiz-button answer-button";
-        btn.textContent = buch;
-        btn.setAttribute('data-book', buch);
-        btn.onclick = () => pruefeAntwort(btn, buch);
+        btn.textContent = `${emoji ? `${emoji} ` : ""}${titel}`;
+        btn.setAttribute('data-book', titel);
+        btn.onclick = () => pruefeAntwort(btn, titel);
         buttonContainer.appendChild(btn);
     });
 }
